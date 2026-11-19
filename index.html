@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ranking de Truco AV 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --feltro:#0d3b2a; --feltro2:#0a2c20; --feltro3:#124a35;
+    --papel:#fbf7ee; --tinta:#1b1b1b; --suave:#9fc2b2; --linha:rgba(255,255,255,.08);
+    --ouro:#f2c14e; --ouro2:#c9932a; --prata:#d6dde3; --prata2:#9aa6b0; --bronze:#d9925b;
+    --vermelho:#d64545; --texto:#eef5f1;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:
+      radial-gradient(1200px 600px at 50% -10%, #1a5c42 0%, transparent 60%),
+      repeating-linear-gradient(45deg, rgba(255,255,255,.012) 0 2px, transparent 2px 6px),
+      var(--feltro2);
+    color:var(--texto); font-family:Inter,system-ui,sans-serif; min-height:100vh;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:24px 16px 60px}
+  header{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
+  .marca{display:flex; align-items:center; gap:14px}
+  .naipes{font-size:28px; letter-spacing:2px; line-height:1}
+  .naipes .r{color:var(--vermelho)}
+  h1{font-family:"Bebas Neue",sans-serif; font-weight:400; font-size:clamp(34px,5vw,54px); letter-spacing:1px; margin:0; line-height:.95}
+  h1 span{color:var(--ouro)}
+  .sub{color:var(--suave); font-size:14px; margin-top:4px}
+  .abas{display:flex; background:rgba(0,0,0,.28); border:1px solid var(--linha); border-radius:999px; padding:4px}
+  .abas button{all:unset; cursor:pointer; padding:10px 18px; border-radius:999px; font-weight:600; font-size:14px; color:var(--suave); white-space:nowrap}
+  .abas button[aria-selected="true"]{background:var(--ouro); color:#2a1d00}
+  .abas button:focus-visible{outline:2px solid var(--ouro); outline-offset:2px}
+  .tela{display:none; animation:entra .45s ease}
+  .tela.ativa{display:block}
+  @keyframes entra{from{opacity:0; transform:translateY(10px)}to{opacity:1; transform:none}}
+
+  /* ---------- PÓDIO EM CARTAS ---------- */
+  .podio{display:grid; grid-template-columns:1fr 1.15fr 1fr; align-items:end; gap:22px; margin:34px auto 10px; max-width:860px}
+  .carta{
+    position:relative; background:var(--papel); color:var(--tinta); border-radius:16px; padding:22px 18px 20px;
+    box-shadow:0 18px 40px rgba(0,0,0,.45), inset 0 0 0 6px #fff, inset 0 0 0 7px rgba(0,0,0,.08);
+    text-align:center; transition:transform .3s ease;
+  }
+  .carta:hover{transform:translateY(-6px) rotate(0deg)!important}
+  .carta.p2{transform:rotate(-4deg)} .carta.p3{transform:rotate(4deg)}
+  .carta.p1{padding-top:34px; padding-bottom:30px}
+  .canto{position:absolute; font-family:"Bebas Neue"; font-size:26px; line-height:.85; text-align:center}
+  .canto small{display:block; font-family:Inter; font-size:18px}
+  .canto.tl{top:12px; left:14px} .canto.br{bottom:12px; right:14px; transform:rotate(180deg)}
+  .vermelho{color:var(--vermelho)}
+  .selo{display:inline-grid; place-items:center; width:64px; height:64px; border-radius:50%; font-family:"Bebas Neue"; font-size:30px; margin-bottom:10px; color:#2a1d00}
+  .p1 .selo{background:radial-gradient(circle at 35% 30%, #ffe7a0, var(--ouro) 55%, var(--ouro2)); width:78px; height:78px; font-size:38px}
+  .p2 .selo{background:radial-gradient(circle at 35% 30%, #fff, var(--prata) 55%, var(--prata2))}
+  .p3 .selo{background:radial-gradient(circle at 35% 30%, #ffd2ad, var(--bronze) 55%, #a7653a)}
+  .carta .nomes{font-weight:800; font-size:16px; line-height:1.3}
+  .p1 .nomes{font-size:19px}
+  .carta .pts{font-family:"Bebas Neue"; font-size:44px; line-height:1; margin-top:10px}
+  .p1 .pts{font-size:60px; color:#8a5a00}
+  .carta .pts small{font-family:Inter; font-size:12px; font-weight:600; color:#777; letter-spacing:1px; display:block}
+
+  /* ---------- NÚMEROS ---------- */
+  .numeros{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:34px 0 22px}
+  .num{background:rgba(0,0,0,.22); border:1px solid var(--linha); border-radius:14px; padding:14px 16px}
+  .num b{display:block; font-family:"Bebas Neue"; font-size:34px; font-weight:400; color:var(--ouro); line-height:1}
+  .num span{font-size:13px; color:var(--suave)}
+
+  /* ---------- LISTA ---------- */
+  .barra{display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:12px}
+  .busca{flex:1; min-width:220px; max-width:380px; background:rgba(0,0,0,.3); border:1px solid var(--linha); color:var(--texto); border-radius:12px; padding:12px 14px; font:inherit; font-size:15px}
+  .busca::placeholder{color:#7fa595}
+  .legenda{display:flex; gap:12px; flex-wrap:wrap; font-size:12px; color:var(--suave); align-items:center}
+  .legenda i{display:inline-block; width:14px; height:14px; border-radius:4px; vertical-align:-3px; margin-right:5px}
+  .lista{background:rgba(0,0,0,.18); border:1px solid var(--linha); border-radius:16px; overflow:hidden}
+  .cab, .linha{display:grid; grid-template-columns:62px minmax(160px,1.3fr) 2fr 86px; gap:14px; align-items:center; padding:10px 16px}
+  .cab{font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--suave); background:rgba(0,0,0,.25)}
+  .cab .etq{display:grid; grid-template-columns:repeat(10,1fr); gap:4px; text-align:center}
+  .linha{border-top:1px solid var(--linha)}
+  .linha:hover{background:rgba(255,255,255,.035)}
+  .pos{font-family:"Bebas Neue"; font-size:26px; color:var(--suave); text-align:center; line-height:1}
+  .linha.top .pos{color:var(--ouro)}
+  .linha.empate .pos{opacity:.0}
+  .quem{min-width:0}
+  .quem .n{font-weight:600; font-size:15px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .quem .trofeus{font-size:12px; color:var(--ouro); margin-top:2px}
+  .tira{display:grid; grid-template-columns:repeat(10,1fr); gap:4px}
+  .c{height:28px; border-radius:6px; display:grid; place-items:center; font-size:12px; font-weight:700; color:#06261a}
+  .c.v0{background:transparent; border:1px dashed rgba(255,255,255,.14); color:transparent}
+  .c.v1{background:#2f6b54; color:#cfe6dc}
+  .c.v2{background:#4c9a78; color:#06261a}
+  .c.v3{background:#8fd1ad}
+  .c.vice{background:linear-gradient(160deg,#fff,var(--prata2))}
+  .c.camp{background:linear-gradient(160deg,#ffe7a0,var(--ouro2)); box-shadow:0 0 12px rgba(242,193,78,.45)}
+  .tot{text-align:right}
+  .tot b{font-family:"Bebas Neue"; font-weight:400; font-size:30px; line-height:1}
+  .tot .mini{height:4px; background:rgba(255,255,255,.08); border-radius:4px; margin-top:4px; overflow:hidden}
+  .tot .mini i{display:block; height:100%; background:var(--ouro)}
+  .vazio{padding:30px; text-align:center; color:var(--suave)}
+
+  /* ---------- TELA 2: ETAPAS ---------- */
+  .intro2{margin:30px 0 20px; color:var(--suave); font-size:15px}
+  .intro2 b{color:var(--texto)}
+  .etapas{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+  .etapa .par{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .etapa .par .dupla{margin-top:0}
+  @media (max-width:980px){ .etapas{grid-template-columns:1fr} }
+  @media (max-width:520px){ .etapa .par{grid-template-columns:1fr} }
+  .etapa{position:relative; background:var(--papel); color:var(--tinta); border-radius:18px; padding:18px 18px 16px;
+    box-shadow:0 14px 30px rgba(0,0,0,.4), inset 0 0 0 5px #fff, inset 0 0 0 6px rgba(0,0,0,.07); overflow:hidden}
+  .etapa .marca-agua{position:absolute; right:-6px; bottom:-28px; font-size:130px; opacity:.06; line-height:1; pointer-events:none}
+  .etapa h3{margin:0 0 12px; font-family:"Bebas Neue"; font-weight:400; font-size:30px; letter-spacing:.5px; display:flex; align-items:baseline; gap:8px}
+  .etapa h3 .naipe{font-size:22px}
+  .dupla{display:grid; grid-template-columns:52px 1fr; gap:12px; align-items:center; padding:10px; border-radius:12px; margin-top:8px}
+  .dupla.camp{background:linear-gradient(120deg,#fff4d2,#fde7a6)}
+  .dupla.vice{background:linear-gradient(120deg,#f3f5f7,#e1e6ea)}
+  .dupla .medalha{width:52px; height:52px; border-radius:50%; display:grid; place-items:center; font-family:"Bebas Neue"; font-size:24px; line-height:1; text-align:center}
+  .dupla .medalha small{display:block; font-family:Inter; font-size:9px; font-weight:700; letter-spacing:.5px}
+  .camp .medalha{background:radial-gradient(circle at 35% 30%, #ffe7a0, var(--ouro) 55%, var(--ouro2)); color:#2a1d00}
+  .vice .medalha{background:radial-gradient(circle at 35% 30%, #fff, var(--prata) 55%, var(--prata2)); color:#2b333a}
+  .dupla .tit{font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:#8a6a1c}
+  .vice .tit{color:#5d6973}
+  .dupla .nm{font-weight:700; font-size:15px; line-height:1.35}
+  .alerta{margin-top:6px; font-size:11px; font-weight:600; color:#b23a3a}
+  .hall{margin-top:36px}
+  .hall h2{font-family:"Bebas Neue"; font-weight:400; font-size:32px; margin:0 0 12px}
+  .hall .grade{display:flex; flex-wrap:wrap; gap:10px}
+  .chip{background:rgba(0,0,0,.25); border:1px solid var(--linha); border-radius:999px; padding:8px 14px; font-size:14px}
+  .chip b{color:var(--ouro); margin-right:6px}
+  footer{margin-top:40px; font-size:12px; color:#6f9584; text-align:center}
+
+  /* ---------- CELULAR ---------- */
+  @media (max-width:760px){
+    .podio{grid-template-columns:1fr; gap:16px; max-width:360px}
+    .carta.p1{order:-1}
+    .carta.p2,.carta.p3{transform:none}
+    .numeros{grid-template-columns:repeat(2,1fr)}
+    .cab{display:none}
+    .linha{grid-template-columns:44px 1fr 64px; row-gap:8px}
+    .linha .tira{grid-column:1 / -1; grid-row:2}
+    .linha .tot{grid-column:3; grid-row:1}
+    .c{height:24px; font-size:11px}
+    .abas{width:100%} .abas button{flex:1; text-align:center; padding:10px 8px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="marca">
+      <div class="naipes" aria-hidden="true">♠<span class="r">♥</span>♣<span class="r">♦</span></div>
+      <div>
+        <h1>Ranking de Truco <span>AV 2026</span></h1>
+        <div class="sub" id="sub"></div>
+      </div>
+    </div>
+    <nav class="abas" role="tablist">
+      <button role="tab" id="aba-ranking" aria-selected="true" data-tela="ranking">🏆 Ranking geral</button>
+      <button role="tab" id="aba-etapas" aria-selected="false" data-tela="etapas">🃏 Campeões das etapas</button>
+    </nav>
+  </header>
+
+  <!-- TELA 1 -->
+  <section class="tela ativa" id="ranking" role="tabpanel">
+    <div class="podio" id="podio"></div>
+    <div class="numeros" id="numeros"></div>
+    <div class="barra">
+      <input class="busca" id="busca" type="search" placeholder="Procurar jogador…" aria-label="Procurar jogador">
+      <div class="legenda">
+        <span><i style="background:linear-gradient(160deg,#ffe7a0,#c9932a)"></i>Campeão (22)</span>
+        <span><i style="background:linear-gradient(160deg,#fff,#9aa6b0)"></i>Vice (20)</span>
+        <span><i style="background:#8fd1ad"></i>14–18</span>
+        <span><i style="background:#4c9a78"></i>8–12</span>
+        <span><i style="background:#2f6b54"></i>4–7</span>
+        <span><i style="border:1px dashed rgba(255,255,255,.3)"></i>Não jogou</span>
+      </div>
+    </div>
+    <div class="lista">
+      <div class="cab"><div style="text-align:center">Pos.</div><div>Jogador</div><div class="etq" id="etq"></div><div style="text-align:right">Total</div></div>
+      <div id="linhas"></div>
+    </div>
+  </section>
+
+  <!-- TELA 2 -->
+  <section class="tela" id="etapas" role="tabpanel">
+    <p class="intro2">Em cada etapa, a <b>dupla campeã</b> soma <b>22 pontos</b> e a <b>dupla vice</b> soma <b>20 pontos</b>.</p>
+    <div class="etapas" id="cartasEtapas"></div>
+    <div class="hall">
+      <h2>Quem mais venceu etapas</h2>
+      <div class="grade" id="hall"></div>
+    </div>
+  </section>
+
+  <footer>Dados da planilha “RANKING TRUCO 2026”. Use as setas ← → do teclado para trocar de tela.</footer>
+</div>
+
+<script src="dados.js"></script>
+<script>
+(function(){
+  const NAIPES = [['♠',0],['♥',1],['♣',0],['♦',1]];
+  const dados = window.RANKING.map(p => ({
+    nome: p.nome,
+    etapas: p.etapas,
+    total: p.etapas.reduce((s,v)=> s + (v||0), 0)
+  }));
+  const N_ETAPAS = dados[0].etapas.length;
+
+  // Classificação: mesma pontuação = mesma posição (igual à planilha)
+  dados.sort((a,b)=> b.total - a.total || a.nome.localeCompare(b.nome,'pt-BR'));
+  let pos = 0, ultimo = null;
+  dados.forEach(p => { if(p.total !== ultimo){ pos++; ultimo = p.total; } p.pos = pos; });
+  dados.forEach(p => {
+    p.titulos = p.etapas.filter(v => v===22).length;
+    p.vices   = p.etapas.filter(v => v===20).length;
+  });
+
+  const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const juntar = nomes => nomes.length <= 1 ? nomes.join('')
+      : nomes.slice(0,-1).join(', ') + ' & ' + nomes[nomes.length-1];
+  const lider = dados[0].total;
+
+  document.getElementById('sub').textContent =
+    `${N_ETAPAS} etapas disputadas · ${dados.length} jogadores`;
+
+  // ---------- Pódio ----------
+  const podio = document.getElementById('podio');
+  const ordemVisual = [2,1,3];
+  podio.innerHTML = ordemVisual.map(n => {
+    const grupo = dados.filter(p => p.pos === n);
+    if(!grupo.length) return '<div></div>';
+    const [s,r] = NAIPES[n-1];
+    const cls = r ? 'vermelho' : '';
+    return `<article class="carta p${n}">
+      <div class="canto tl ${cls}">${n}<small>${s}</small></div>
+      <div class="canto br ${cls}">${n}<small>${s}</small></div>
+      <div class="selo">${n}º</div>
+      <div class="nomes">${grupo.map(p=>esc(p.nome)).join('<br>')}</div>
+      <div class="pts">${grupo[0].total}<small>PONTOS</small></div>
+    </article>`;
+  }).join('');
+
+  // ---------- Etapas (campeões e vices) ----------
+  const etapas = [];
+  for(let i=0;i<N_ETAPAS;i++){
+    etapas.push({
+      n: i+1,
+      camp: dados.filter(p => p.etapas[i]===22).map(p=>p.nome),
+      vice: dados.filter(p => p.etapas[i]===20).map(p=>p.nome)
+    });
+  }
+
+  // ---------- Números ----------
+  const maisEtapas = Math.max(...dados.map(p=>p.etapas.filter(v=>v!=null).length));
+  const maxTit = Math.max(...dados.map(p=>p.titulos));
+  const mediaPart = Math.round(etapas.reduce((s,_,i)=> s + dados.filter(p=>p.etapas[i]!=null).length, 0) / N_ETAPAS);
+  document.getElementById('numeros').innerHTML = [
+    [dados.length, 'jogadores no ranking'],
+    [mediaPart, 'jogadores por etapa (média)'],
+    [maxTit, 'títulos de etapa — recorde individual'],
+    [lider - dados.find(p=>p.pos===2).total, 'pontos de vantagem do líder']
+  ].map(([v,t]) => `<div class="num"><b>${v}</b><span>${t}</span></div>`).join('');
+
+  // ---------- Lista ----------
+  document.getElementById('etq').innerHTML =
+    Array.from({length:N_ETAPAS},(_,i)=>`<span>${i+1}ª</span>`).join('');
+
+  function classe(v){
+    if(v==null) return 'v0';
+    if(v===22) return 'camp';
+    if(v===20) return 'vice';
+    if(v>=14) return 'v3';
+    if(v>=8)  return 'v2';
+    return 'v1';
+  }
+  function desenhar(filtro){
+    const f = (filtro||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().trim();
+    const lista = dados.filter(p => !f || p.nome.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().includes(f));
+    let anterior = null;
+    document.getElementById('linhas').innerHTML = lista.length ? lista.map(p => {
+      const empate = !f && p.pos === anterior; anterior = p.pos;
+      const tr = [];
+      if(p.titulos) tr.push('🏆'.repeat(p.titulos) + ` ${p.titulos} título${p.titulos>1?'s':''}`);
+      if(p.vices) tr.push(`🥈 ${p.vices} vice${p.vices>1?'s':''}`);
+      return `<div class="linha ${p.pos<=3?'top':''} ${empate?'empate':''}">
+        <div class="pos">${p.pos}º</div>
+        <div class="quem"><div class="n" title="${esc(p.nome)}">${esc(p.nome)}</div>${tr.length?`<div class="trofeus">${tr.join(' · ')}</div>`:''}</div>
+        <div class="tira">${p.etapas.map((v,i)=>`<div class="c ${classe(v)}" title="${i+1}ª etapa: ${v==null?'não jogou':v+' pts'}">${v==null?'·':v}</div>`).join('')}</div>
+        <div class="tot"><b>${p.total}</b><div class="mini"><i style="width:${(p.total/lider*100).toFixed(1)}%"></i></div></div>
+      </div>`;
+    }).join('') : '<div class="vazio">Nenhum jogador encontrado.</div>';
+  }
+  desenhar('');
+  document.getElementById('busca').addEventListener('input', e => desenhar(e.target.value));
+
+  // ---------- Tela 2 ----------
+  const bloco = (tipo, nomes, pts) => {
+    const titulo = tipo==='camp' ? 'Dupla campeã' : 'Dupla vice';
+    const aviso = nomes.length !== 2
+      ? `<div class="alerta">⚠ ${nomes.length} jogador(es) com ${pts} pts nesta etapa — conferir na planilha</div>` : '';
+    return `<div class="dupla ${tipo}">
+      <div class="medalha">${pts}<small>PTS</small></div>
+      <div><div class="tit">${titulo}</div><div class="nm">${nomes.length? nomes.map(esc).join('<br>') : '—'}</div>${aviso}</div>
+    </div>`;
+  };
+  document.getElementById('cartasEtapas').innerHTML = etapas.map(e => {
+    const [s,r] = NAIPES[(e.n-1)%4];
+    return `<article class="etapa">
+      <div class="marca-agua ${r?'vermelho':''}">${s}</div>
+      <h3><span class="naipe ${r?'vermelho':''}">${s}</span>${e.n}ª etapa</h3>
+      <div class="par">${bloco('camp', e.camp, 22)}${bloco('vice', e.vice, 20)}</div>
+    </article>`;
+  }).join('');
+
+  // Hall: duplas campeãs mais vezes
+  const cont = {};
+  etapas.forEach(e => { if(e.camp.length){ const k = juntar(e.camp); cont[k] = (cont[k]||0)+1; } });
+  document.getElementById('hall').innerHTML = Object.entries(cont)
+    .sort((a,b)=> b[1]-a[1] || a[0].localeCompare(b[0],'pt-BR'))
+    .map(([k,v]) => `<div class="chip"><b>${v}×</b>${esc(k)}</div>`).join('');
+
+  // ---------- Troca de telas ----------
+  const telas = ['ranking','etapas'];
+  function mostrar(id){
+    telas.forEach(t => {
+      document.getElementById(t).classList.toggle('ativa', t===id);
+      document.getElementById('aba-'+t).setAttribute('aria-selected', t===id);
+    });
+    if(location.hash !== '#'+id) history.replaceState(null,'','#'+id);
+  }
+  document.querySelectorAll('.abas button').forEach(b => b.addEventListener('click', () => mostrar(b.dataset.tela)));
+  document.addEventListener('keydown', e => {
+    if(e.target.tagName === 'INPUT') return;
+    const atual = telas.findIndex(t => document.getElementById(t).classList.contains('ativa'));
+    if(e.key === 'ArrowRight') mostrar(telas[(atual+1)%telas.length]);
+    if(e.key === 'ArrowLeft')  mostrar(telas[(atual-1+telas.length)%telas.length]);
+  });
+  mostrar(location.hash === '#etapas' ? 'etapas' : 'ranking');
+})();
+</script>
+</body>
+</html>
