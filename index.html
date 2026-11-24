@@ -131,6 +131,15 @@
   .chip b{color:var(--ouro); margin-right:6px}
   footer{margin-top:40px; font-size:12px; color:#6f9584; text-align:center}
 
+  /* ---------- BOTÃO PDF ---------- */
+  .acoes{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+  .btn-pdf{all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:999px;
+    background:var(--papel); color:#1b1b1b; font-weight:700; font-size:14px; box-shadow:0 6px 16px rgba(0,0,0,.35); transition:transform .15s ease}
+  .btn-pdf:hover{transform:translateY(-2px)}
+  .btn-pdf:focus-visible{outline:2px solid var(--ouro); outline-offset:2px}
+  .btn-pdf svg{color:var(--vermelho)}
+  .so-impressao{display:none}
+
   /* ---------- CELULAR ---------- */
   @media (max-width:760px){
     .podio{grid-template-columns:1fr; gap:16px; max-width:360px}
@@ -142,7 +151,85 @@
     .linha .tira{grid-column:1 / -1; grid-row:2}
     .linha .tot{grid-column:3; grid-row:1}
     .c{height:24px; font-size:11px}
-    .abas{width:100%} .abas button{flex:1; text-align:center; padding:10px 8px}
+    .acoes{width:100%} .abas{flex:1} .abas button{flex:1; text-align:center; padding:10px 8px}
+    .btn-pdf span{display:none} .btn-pdf{padding:10px 12px}
+  }
+
+  /* ---------- IMPRESSÃO / PDF (A4) ---------- */
+  @page{size:A4 portrait; margin:12mm 10mm 14mm}
+  @media print{
+    *{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+    html,body{background:#fff!important; color:#1b1b1b}
+    body{font-size:10pt}
+    .wrap{max-width:none; padding:0}
+    .acoes, .barra, footer{display:none!important}
+    .so-impressao{display:block}
+    .tela{display:block!important; animation:none}
+    header{border-bottom:3px solid #0d3b2a; padding-bottom:8px}
+    .naipes{font-size:20px; color:#1b1b1b}
+    h1{font-size:30pt; color:#0d3b2a} h1 span{color:#b07d10}
+    .sub{color:#555}
+    .cab-impressao{font-size:8.5pt; color:#666; margin-top:4px; text-align:right}
+    .titulo-impressao{font-family:"Bebas Neue",sans-serif; font-weight:400; font-size:22pt; color:#0d3b2a; margin:10px 0 6px; letter-spacing:.5px}
+
+    /* pódio */
+    .podio{margin:6px auto 0; gap:14px; max-width:none; grid-template-columns:1fr 1.15fr 1fr!important}
+    .carta, .carta.p2, .carta.p3{transform:none!important; box-shadow:none; border:1.5px solid #c9c2ae; padding:12px 10px}
+    .carta.p1{padding:16px 10px; border-color:#c9932a; order:0!important}
+    .selo{width:40px; height:40px; font-size:20px; margin-bottom:4px}
+    .p1 .selo{width:48px; height:48px; font-size:24px}
+    .carta .nomes{font-size:10pt} .p1 .nomes{font-size:11pt}
+    .carta .pts{font-size:26pt; margin-top:4px} .p1 .pts{font-size:34pt}
+    .canto{font-size:16px} .canto small{font-size:12px}
+
+    /* números */
+    .numeros{grid-template-columns:repeat(4,1fr)!important; gap:8px; margin:12px 0}
+    .num{background:#f4f7f5; border:1px solid #dbe5df; padding:8px 10px}
+    .num b{font-size:20pt; color:#0d3b2a} .num span{color:#555; font-size:8pt}
+
+    /* lista */
+    .lista{background:#fff; border:1px solid #cfd8d3; border-radius:8px}
+    .cab, .linha{grid-template-columns:34px minmax(0,1.25fr) 2fr 48px!important; gap:8px; padding:3px 8px}
+    .cab{display:grid!important; background:#0d3b2a; color:#fff; font-size:7pt; position:static}
+    .cab .etq{display:grid}
+    .linha{border-top:1px solid #e3e9e5; break-inside:avoid; page-break-inside:avoid}
+    .linha:nth-child(even){background:#f7faf8}
+    .linha .tira, .linha .tot{grid-column:auto; grid-row:auto}
+    .pos{font-size:13pt; color:#666} .linha.top .pos{color:#b07d10}
+    .quem .n{font-size:8.5pt; color:#1b1b1b}
+    .quem .trofeus{font-size:6.5pt; color:#8a6a1c; margin-top:0}
+    .tira{gap:2px}
+    .c{height:15px; border-radius:3px; font-size:7pt}
+    .c.v0{border-color:#ccd6d0; color:#b5c2bb}
+    .c.v1{background:#dcefe5; color:#1d4d3a}
+    .c.v2{background:#a9dcc1; color:#123a2a}
+    .c.v3{background:#6cc29a; color:#0b2a1d}
+    .c.camp{box-shadow:none}
+    .tot b{font-size:13pt; color:#0d3b2a; line-height:1}
+    .tot .mini{display:none}
+    .pos{line-height:1}
+    .quem .n{line-height:1.15}
+    .quem .trofeus{line-height:1.1}
+    .linha{min-height:0; padding-top:2px; padding-bottom:2px}
+    .c{height:14px}
+
+    /* tela 2 em página nova */
+    #etapas{break-before:page; page-break-before:always}
+    .intro2{color:#444; margin:0 0 10px; font-size:9.5pt} .intro2 b{color:#1b1b1b}
+    .etapas{grid-template-columns:1fr 1fr!important; gap:10px}
+    .etapa{box-shadow:none; border:1.5px solid #c9c2ae; padding:10px 12px; break-inside:avoid; page-break-inside:avoid}
+    .etapa h3{font-size:16pt; margin-bottom:6px}
+    .etapa .par{grid-template-columns:1fr 1fr!important; gap:6px}
+    .dupla{grid-template-columns:34px 1fr; gap:6px; padding:6px}
+    .dupla .medalha{width:34px; height:34px; font-size:15px}
+    .dupla .medalha small{font-size:6pt}
+    .dupla .tit{font-size:6.5pt} .dupla .nm{font-size:8.5pt}
+    .alerta{font-size:6.5pt}
+    .etapa .marca-agua{font-size:80px; bottom:-16px}
+    .hall{margin-top:14px; break-inside:avoid}
+    .hall h2{font-size:18pt; color:#0d3b2a; margin-bottom:6px}
+    .chip{background:#f4f7f5; border:1px solid #dbe5df; color:#1b1b1b; font-size:8.5pt; padding:4px 10px}
+    .chip b{color:#b07d10}
   }
 </style>
 </head>
@@ -156,14 +243,24 @@
         <div class="sub" id="sub"></div>
       </div>
     </div>
-    <nav class="abas" role="tablist">
-      <button role="tab" id="aba-ranking" aria-selected="true" data-tela="ranking">🏆 Ranking geral</button>
-      <button role="tab" id="aba-etapas" aria-selected="false" data-tela="etapas">🃏 Campeões das etapas</button>
-    </nav>
+    <div class="acoes">
+      <nav class="abas" role="tablist">
+        <button role="tab" id="aba-ranking" aria-selected="true" data-tela="ranking">🏆 Ranking geral</button>
+        <button role="tab" id="aba-etapas" aria-selected="false" data-tela="etapas">🃏 Campeões das etapas</button>
+      </nav>
+      <button class="btn-pdf" id="btnPdf" type="button" title="Baixar como PDF / Imprimir" aria-label="Baixar como PDF">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6"/><path d="m9 14 3 3 3-3"/>
+        </svg>
+        <span>PDF</span>
+      </button>
+    </div>
   </header>
+  <div class="so-impressao cab-impressao" id="cabImpressao"></div>
 
   <!-- TELA 1 -->
   <section class="tela ativa" id="ranking" role="tabpanel">
+    <h2 class="so-impressao titulo-impressao">Ranking geral</h2>
     <div class="podio" id="podio"></div>
     <div class="numeros" id="numeros"></div>
     <div class="barra">
@@ -185,6 +282,7 @@
 
   <!-- TELA 2 -->
   <section class="tela" id="etapas" role="tabpanel">
+    <h2 class="so-impressao titulo-impressao">Campeões das etapas</h2>
     <p class="intro2">Em cada etapa, a <b>dupla campeã</b> soma <b>22 pontos</b> e a <b>dupla vice</b> soma <b>20 pontos</b>.</p>
     <div class="etapas" id="cartasEtapas"></div>
     <div class="hall">
@@ -337,6 +435,21 @@
     if(e.key === 'ArrowLeft')  mostrar(telas[(atual-1+telas.length)%telas.length]);
   });
   mostrar(location.hash === '#etapas' ? 'etapas' : 'ranking');
+
+  // ---------- PDF / impressão ----------
+  const hoje = new Date();
+  document.getElementById('cabImpressao').textContent =
+    'Gerado em ' + hoje.toLocaleDateString('pt-BR') + ' · ' + location.href.split('#')[0];
+  const buscaEl = document.getElementById('busca');
+  document.getElementById('btnPdf').addEventListener('click', () => {
+    // o PDF sempre sai com a lista completa
+    if(buscaEl.value){ buscaEl.value = ''; desenhar(''); }
+    const tituloOriginal = document.title;
+    document.title = 'Ranking Truco AV 2026';   // vira o nome do arquivo PDF
+    window.print();
+    setTimeout(() => { document.title = tituloOriginal; }, 1000);
+  });
+  window.addEventListener('beforeprint', () => { if(buscaEl.value){ buscaEl.value=''; desenhar(''); } });
 })();
 </script>
 </body>
