@@ -8,8 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --feltro:#0d3b2a; --feltro2:#0a2c20; --feltro3:#124a35;
-    --papel:#fbf7ee; --tinta:#1b1b1b; --suave:#9fc2b2; --linha:rgba(255,255,255,.08);
+    --feltro:#0a4a56; --feltro2:#062b34; --feltro3:#0f5a69;
+    --papel:#fbf7ee; --tinta:#1b1b1b; --suave:#9cc7ce; --linha:rgba(255,255,255,.08);
     --ouro:#f2c14e; --ouro2:#c9932a; --prata:#d6dde3; --prata2:#9aa6b0; --bronze:#d9925b;
     --vermelho:#d64545; --texto:#eef5f1;
   }
@@ -17,7 +17,7 @@
   html,body{margin:0}
   body{
     background:
-      radial-gradient(1200px 600px at 50% -10%, #1a5c42 0%, transparent 60%),
+      radial-gradient(1200px 600px at 50% -10%, #12697a 0%, transparent 60%),
       repeating-linear-gradient(45deg, rgba(255,255,255,.012) 0 2px, transparent 2px 6px),
       var(--feltro2);
     color:var(--texto); font-family:Inter,system-ui,sans-serif; min-height:100vh;
@@ -71,7 +71,7 @@
   /* ---------- LISTA ---------- */
   .barra{display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:12px}
   .busca{flex:1; min-width:220px; max-width:380px; background:rgba(0,0,0,.3); border:1px solid var(--linha); color:var(--texto); border-radius:12px; padding:12px 14px; font:inherit; font-size:15px}
-  .busca::placeholder{color:#7fa595}
+  .busca::placeholder{color:#86b3ba}
   .legenda{display:flex; gap:12px; flex-wrap:wrap; font-size:12px; color:var(--suave); align-items:center}
   .legenda i{display:inline-block; width:14px; height:14px; border-radius:4px; vertical-align:-3px; margin-right:5px}
   .lista{background:rgba(0,0,0,.18); border:1px solid var(--linha); border-radius:16px; overflow:hidden}
@@ -87,11 +87,11 @@
   .quem .n{font-weight:600; font-size:15px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
   .quem .trofeus{font-size:12px; color:var(--ouro); margin-top:2px}
   .tira{display:grid; grid-template-columns:repeat(10,1fr); gap:4px}
-  .c{height:28px; border-radius:6px; display:grid; place-items:center; font-size:12px; font-weight:700; color:#06261a}
+  .c{height:28px; border-radius:6px; display:grid; place-items:center; font-size:12px; font-weight:700; color:#04232a}
   .c.v0{background:transparent; border:1px dashed rgba(255,255,255,.14); color:transparent}
-  .c.v1{background:#2f6b54; color:#cfe6dc}
-  .c.v2{background:#4c9a78; color:#06261a}
-  .c.v3{background:#8fd1ad}
+  .c.v1{background:#1f5f6b; color:#d3ecef}
+  .c.v2{background:#3f93a0; color:#04232a}
+  .c.v3{background:#8fd0d8}
   .c.vice{background:linear-gradient(160deg,#fff,var(--prata2))}
   .c.camp{background:linear-gradient(160deg,#ffe7a0,var(--ouro2)); box-shadow:0 0 12px rgba(242,193,78,.45)}
   .tot{text-align:right}
@@ -129,7 +129,65 @@
   .hall .grade{display:flex; flex-wrap:wrap; gap:10px}
   .chip{background:rgba(0,0,0,.25); border:1px solid var(--linha); border-radius:999px; padding:8px 14px; font-size:14px}
   .chip b{color:var(--ouro); margin-right:6px}
-  footer{margin-top:40px; font-size:12px; color:#6f9584; text-align:center}
+  footer{margin-top:40px; font-size:12px; color:#7aa5ac; text-align:center}
+
+  /* ---------- TELA 3: ARTE TORNEIO DOS CAMPEÕES ---------- */
+  .acao-arte{display:flex; justify-content:flex-end; margin:26px 0 14px}
+  .arte{
+    position:relative; overflow:hidden; text-align:center; border-radius:26px; padding:40px 28px 30px;
+    background:
+      radial-gradient(700px 340px at 50% 0%, rgba(120,210,222,.22), transparent 65%),
+      radial-gradient(500px 260px at 50% 100%, rgba(242,193,78,.10), transparent 70%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 1px, transparent 1px 9px),
+      linear-gradient(180deg, #0e6a7a 0%, #0a4f5c 45%, #05303a 100%);
+    border:2px solid var(--ouro2);
+    box-shadow:0 24px 60px rgba(0,0,0,.5), inset 0 0 0 8px rgba(0,0,0,.18), inset 0 0 0 10px rgba(242,193,78,.35);
+  }
+  .arte-naipes{font-size:20px; letter-spacing:8px; color:#e9efe9; opacity:.85}
+  .arte-naipes .r{color:var(--vermelho)}
+  .arte-coroa{font-size:46px; line-height:1; margin-top:10px; filter:drop-shadow(0 6px 14px rgba(242,193,78,.5))}
+  .arte-sobre{margin-top:8px; font-size:13px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:var(--suave)}
+  .arte-titulo{font-family:"Bebas Neue",sans-serif; font-weight:400; font-size:clamp(44px,8vw,92px); line-height:.9; margin:6px 0 0; letter-spacing:1px; color:#fff}
+  .arte-titulo span{display:block; padding-top:.12em; margin-top:-.12em; background:linear-gradient(180deg,#ffe7a0,var(--ouro) 50%,var(--ouro2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .arte-info{display:flex; justify-content:center; align-items:stretch; gap:12px; flex-wrap:wrap; margin-top:18px}
+  .arte-item{display:flex; flex-direction:column; justify-content:center; text-align:left; padding:8px 16px; border-radius:16px;
+    background:rgba(2,30,36,.45); border:1px solid rgba(242,193,78,.45)}
+  .arte-item small{font-size:10.5px; font-weight:800; letter-spacing:2px; text-transform:uppercase; color:var(--ouro)}
+  .arte-item b{font-size:16px; line-height:1.2; color:#fff}
+  .arte-item:nth-child(2) b{font-family:"Bebas Neue"; font-weight:400; font-size:38px; line-height:.95}
+  .arte-confirma{display:inline-block; margin-top:14px; padding:8px 16px; border-radius:999px; background:linear-gradient(120deg,#ffe7a0,var(--ouro)); color:#053039; font-size:14px; font-weight:600; box-shadow:0 8px 20px rgba(0,0,0,.3)}
+  .arte-confirma b{font-weight:800}
+  .arte-data{display:inline-flex; align-items:center; gap:10px; margin-top:0; padding:8px 18px 8px 14px; border-radius:16px; background:var(--papel); color:#1b1b1b; box-shadow:0 10px 24px rgba(0,0,0,.35)}
+  .arte-data b{font-family:"Bebas Neue"; font-weight:400; font-size:46px; line-height:.9; color:#0a4f5c}
+  .arte-data span{color:#0a4f5c}
+  .arte-data span{font-family:"Bebas Neue"; font-size:20px; line-height:.95; text-align:left}
+  .arte-data i{font-style:normal; font-weight:800; font-size:13px; letter-spacing:2px; text-transform:uppercase; border-left:2px solid #ddd; padding-left:10px}
+  .arte-sub{margin:26px 0 16px; font-family:"Bebas Neue"; font-size:30px; letter-spacing:3px; color:var(--ouro); display:flex; align-items:center; gap:14px; justify-content:center}
+  .arte-sub::before, .arte-sub::after{content:""; height:2px; width:min(18vw,140px); background:linear-gradient(90deg,transparent,var(--ouro))}
+  .arte-sub::after{transform:scaleX(-1)}
+  .arte-grade{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; text-align:left}
+  .vaga{position:relative; background:var(--papel); color:#1b1b1b; border-radius:14px; padding:14px 12px 12px; min-height:150px;
+    box-shadow:0 12px 26px rgba(0,0,0,.4), inset 0 0 0 4px #fff, inset 0 0 0 5px rgba(0,0,0,.07); display:flex; flex-direction:column; overflow:hidden}
+  .vaga::before{content:""; position:absolute; left:0; right:0; top:0; height:5px; background:linear-gradient(90deg,#0a4f5c,#16899b)}
+  .vaga.herdada::before{background:linear-gradient(90deg,#7d8a93,#c5cdd3)}
+  .vaga .num-vaga{position:absolute; top:10px; right:10px; font-family:"Bebas Neue"; font-size:34px; line-height:1; color:rgba(10,79,92,.14)}
+  .vaga .de{font-size:10.5px; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:#0a4f5c; display:flex; align-items:center; gap:6px}
+  .vaga .de .naipe{font-size:15px}
+  .vaga .nm{font-weight:800; font-size:15px; line-height:1.3; margin-top:8px; flex:1}
+  .vaga .tag{align-self:flex-start; margin-top:10px; font-size:10.5px; font-weight:800; padding:4px 9px; border-radius:999px; letter-spacing:.5px}
+  .vaga .tag.camp{background:linear-gradient(120deg,#ffe7a0,var(--ouro)); color:#2a1d00}
+  .vaga .tag.vice{background:linear-gradient(120deg,#fff,var(--prata)); color:#2b333a; border:1px solid #c5cdd3}
+  .vaga .obs{font-size:10.5px; color:#5d6973; margin-top:6px; line-height:1.3}
+  .vaga.herdada{box-shadow:0 12px 26px rgba(0,0,0,.4), inset 0 0 0 4px #fff, inset 0 0 0 6px var(--prata2)}
+  .vaga .alerta{font-size:10px}
+  .arte-regra{max-width:640px; margin:22px auto 0; font-size:12.5px; color:var(--suave); line-height:1.5}
+  @media (max-width:1000px){ .arte-grade{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:520px){
+    .arte{padding:30px 14px 22px; border-radius:20px}
+    .arte-grade{grid-template-columns:1fr 1fr; gap:10px}
+    .vaga{min-height:130px; padding:12px 10px 10px} .vaga .nm{font-size:13.5px}
+    .acao-arte{justify-content:stretch} .acao-arte .btn-pdf{flex:1; justify-content:center}
+  }
 
   /* ---------- BOTÃO PDF ---------- */
   .acoes{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
@@ -139,6 +197,13 @@
   .btn-pdf:focus-visible{outline:2px solid var(--ouro); outline-offset:2px}
   .btn-pdf svg{color:var(--vermelho)}
   .so-impressao{display:none}
+  .abas .sm{display:none}
+  @media (max-width:760px){
+    .abas .lg{display:none} .abas .sm{display:inline}
+    .abas button{font-size:13px; padding:10px 6px}
+    .arte-sub{font-size:24px; gap:8px}
+    .arte-sub::before, .arte-sub::after{width:28px}
+  }
 
   /* ---------- CELULAR ---------- */
   @media (max-width:760px){
@@ -165,12 +230,12 @@
     .acoes, .barra, footer{display:none!important}
     .so-impressao{display:block}
     .tela{display:block!important; animation:none}
-    header{border-bottom:3px solid #0d3b2a; padding-bottom:8px}
+    header{border-bottom:3px solid #0a4a56; padding-bottom:8px}
     .naipes{font-size:20px; color:#1b1b1b}
-    h1{font-size:30pt; color:#0d3b2a} h1 span{color:#b07d10}
+    h1{font-size:30pt; color:#0a4a56} h1 span{color:#b07d10}
     .sub{color:#555}
     .cab-impressao{font-size:8.5pt; color:#666; margin-top:4px; text-align:right}
-    .titulo-impressao{font-family:"Bebas Neue",sans-serif; font-weight:400; font-size:22pt; color:#0d3b2a; margin:10px 0 6px; letter-spacing:.5px}
+    .titulo-impressao{font-family:"Bebas Neue",sans-serif; font-weight:400; font-size:22pt; color:#0a4a56; margin:10px 0 6px; letter-spacing:.5px}
 
     /* pódio */
     .podio{margin:6px auto 0; gap:14px; max-width:none; grid-template-columns:1fr 1.15fr 1fr!important}
@@ -184,28 +249,28 @@
 
     /* números */
     .numeros{grid-template-columns:repeat(4,1fr)!important; gap:8px; margin:12px 0}
-    .num{background:#f4f7f5; border:1px solid #dbe5df; padding:8px 10px}
-    .num b{font-size:20pt; color:#0d3b2a} .num span{color:#555; font-size:8pt}
+    .num{background:#f3f8f9; border:1px solid #d6e6e9; padding:8px 10px}
+    .num b{font-size:20pt; color:#0a4a56} .num span{color:#555; font-size:8pt}
 
     /* lista */
-    .lista{background:#fff; border:1px solid #cfd8d3; border-radius:8px}
+    .lista{background:#fff; border:1px solid #cddfe2; border-radius:8px}
     .cab, .linha{grid-template-columns:34px minmax(0,1.25fr) 2fr 48px!important; gap:8px; padding:3px 8px}
-    .cab{display:grid!important; background:#0d3b2a; color:#fff; font-size:7pt; position:static}
+    .cab{display:grid!important; background:#0a4a56; color:#fff; font-size:7pt; position:static}
     .cab .etq{display:grid}
-    .linha{border-top:1px solid #e3e9e5; break-inside:avoid; page-break-inside:avoid}
-    .linha:nth-child(even){background:#f7faf8}
+    .linha{border-top:1px solid #e1eced; break-inside:avoid; page-break-inside:avoid}
+    .linha:nth-child(even){background:#f6fafb}
     .linha .tira, .linha .tot{grid-column:auto; grid-row:auto}
     .pos{font-size:13pt; color:#666} .linha.top .pos{color:#b07d10}
     .quem .n{font-size:8.5pt; color:#1b1b1b}
     .quem .trofeus{font-size:6.5pt; color:#8a6a1c; margin-top:0}
     .tira{gap:2px}
     .c{height:15px; border-radius:3px; font-size:7pt}
-    .c.v0{border-color:#ccd6d0; color:#b5c2bb}
-    .c.v1{background:#dcefe5; color:#1d4d3a}
-    .c.v2{background:#a9dcc1; color:#123a2a}
-    .c.v3{background:#6cc29a; color:#0b2a1d}
+    .c.v0{border-color:#c9dadd; color:#b0c4c8}
+    .c.v1{background:#dcf0f2; color:#164a54}
+    .c.v2{background:#ade0e6; color:#0e3a42}
+    .c.v3{background:#6fc0ca; color:#072a31}
     .c.camp{box-shadow:none}
-    .tot b{font-size:13pt; color:#0d3b2a; line-height:1}
+    .tot b{font-size:13pt; color:#0a4a56; line-height:1}
     .tot .mini{display:none}
     .pos{line-height:1}
     .quem .n{line-height:1.15}
@@ -215,6 +280,36 @@
 
     /* tela 2 em página nova */
     #etapas{break-before:page; page-break-before:always}
+
+    /* arte do torneio: página própria */
+    #torneio{break-before:page; page-break-before:always}
+    .acao-arte{display:none!important}
+    .arte{box-shadow:none; border-radius:16px; padding:18px 18px 14px; break-inside:avoid; page-break-inside:avoid;
+      min-height:270mm; display:flex; flex-direction:column; justify-content:center}
+    .arte-naipes{font-size:14px}
+    .arte-coroa{font-size:30px; margin-top:4px}
+    .arte-sobre{font-size:9pt; margin-top:4px}
+    .arte-titulo{font-size:50pt}
+    .arte-grade{grid-template-columns:repeat(2,1fr)!important; gap:7px}
+    .vaga{min-height:0; box-shadow:inset 0 0 0 3px #fff, inset 0 0 0 4px rgba(0,0,0,.1); padding:7px 10px 8px; break-inside:avoid}
+    .vaga.herdada{box-shadow:inset 0 0 0 3px #fff, inset 0 0 0 5px var(--prata2)}
+    .vaga .num-vaga{font-size:24px; top:5px}
+    .vaga .de{font-size:7.5pt}
+    .vaga .nm{font-size:10.5pt; margin-top:3px; line-height:1.25}
+    .vaga .tag{margin-top:4px; font-size:7.5pt; padding:2px 8px}
+    .vaga .obs{font-size:7pt; margin-top:3px}
+    .vaga .alerta{font-size:7pt; margin-top:2px}
+    .arte-data{box-shadow:none; padding:5px 14px 5px 12px}
+    .arte-data b{font-size:36px}
+    .arte-item{padding:5px 12px}
+    .arte-item:nth-child(2) b{font-size:30px}
+    .arte-info{margin-top:10px} .arte-confirma{margin-top:8px; font-size:10pt; padding:5px 14px; align-self:center}
+    .arte-sub{margin:12px 0 8px; font-size:20pt}
+    .arte-regra{margin-top:10px; font-size:8pt}
+
+    /* quando baixa só a arte */
+    body.so-arte header, body.so-arte .cab-impressao, body.so-arte #ranking, body.so-arte #etapas{display:none!important}
+    body.so-arte #torneio{break-before:auto; page-break-before:auto}
     .intro2{color:#444; margin:0 0 10px; font-size:9.5pt} .intro2 b{color:#1b1b1b}
     .etapas{grid-template-columns:1fr 1fr!important; gap:10px}
     .etapa{box-shadow:none; border:1.5px solid #c9c2ae; padding:10px 12px; break-inside:avoid; page-break-inside:avoid}
@@ -227,8 +322,8 @@
     .alerta{font-size:6.5pt}
     .etapa .marca-agua{font-size:80px; bottom:-16px}
     .hall{margin-top:14px; break-inside:avoid}
-    .hall h2{font-size:18pt; color:#0d3b2a; margin-bottom:6px}
-    .chip{background:#f4f7f5; border:1px solid #dbe5df; color:#1b1b1b; font-size:8.5pt; padding:4px 10px}
+    .hall h2{font-size:18pt; color:#0a4a56; margin-bottom:6px}
+    .chip{background:#f3f8f9; border:1px solid #d6e6e9; color:#1b1b1b; font-size:8.5pt; padding:4px 10px}
     .chip b{color:#b07d10}
   }
 </style>
@@ -245,8 +340,9 @@
     </div>
     <div class="acoes">
       <nav class="abas" role="tablist">
-        <button role="tab" id="aba-ranking" aria-selected="true" data-tela="ranking">🏆 Ranking geral</button>
-        <button role="tab" id="aba-etapas" aria-selected="false" data-tela="etapas">🃏 Campeões das etapas</button>
+        <button role="tab" id="aba-ranking" aria-selected="true" data-tela="ranking">🏆 <span class="lg">Ranking geral</span><span class="sm">Ranking</span></button>
+        <button role="tab" id="aba-etapas" aria-selected="false" data-tela="etapas">🃏 <span class="lg">Campeões das etapas</span><span class="sm">Etapas</span></button>
+        <button role="tab" id="aba-torneio" aria-selected="false" data-tela="torneio">👑 <span class="lg">Torneio dos Campeões</span><span class="sm">Torneio</span></button>
       </nav>
       <button class="btn-pdf" id="btnPdf" type="button" title="Baixar como PDF / Imprimir" aria-label="Baixar como PDF">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -268,9 +364,9 @@
       <div class="legenda">
         <span><i style="background:linear-gradient(160deg,#ffe7a0,#c9932a)"></i>Campeão (22)</span>
         <span><i style="background:linear-gradient(160deg,#fff,#9aa6b0)"></i>Vice (20)</span>
-        <span><i style="background:#8fd1ad"></i>14–18</span>
-        <span><i style="background:#4c9a78"></i>8–12</span>
-        <span><i style="background:#2f6b54"></i>4–7</span>
+        <span><i style="background:#8fd0d8"></i>14–18</span>
+        <span><i style="background:#3f93a0"></i>8–12</span>
+        <span><i style="background:#1f5f6b"></i>4–7</span>
         <span><i style="border:1px dashed rgba(255,255,255,.3)"></i>Não jogou</span>
       </div>
     </div>
@@ -288,6 +384,33 @@
     <div class="hall">
       <h2>Quem mais venceu etapas</h2>
       <div class="grade" id="hall"></div>
+    </div>
+  </section>
+
+  <!-- TELA 3: ARTE DO TORNEIO DOS CAMPEÕES -->
+  <section class="tela" id="torneio" role="tabpanel">
+    <div class="acao-arte">
+      <button class="btn-pdf" id="btnPdfArte" type="button">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6"/><path d="m9 14 3 3 3-3"/>
+        </svg>
+        Baixar só esta arte em PDF
+      </button>
+    </div>
+    <div class="arte" id="arte">
+      <div class="arte-naipes" aria-hidden="true">♠ <span class="r">♥</span> ♣ <span class="r">♦</span></div>
+      <div class="arte-coroa" aria-hidden="true">👑</div>
+      <div class="arte-sobre">Ranking de Truco AV 2026</div>
+      <h2 class="arte-titulo">Torneio dos <span>Campeões</span></h2>
+      <div class="arte-info">
+        <div class="arte-data"><b>29</b><span>NOV<br>2026</span><i>Domingo</i></div>
+        <div class="arte-item"><small>Horário</small><b>11h</b></div>
+        <div class="arte-item"><small>Local</small><b>Salão de Jogos<br>Espaço Soccer</b></div>
+      </div>
+      <div class="arte-confirma">✋ Confirme sua participação até <b>quinta-feira, 26/11</b></div>
+      <div class="arte-sub">Duplas classificadas</div>
+      <div class="arte-grade" id="classificados"></div>
+      <p class="arte-regra">Classifica a dupla campeã de cada etapa. Quando a campeã já estava classificada por uma etapa anterior, a vaga fica com a dupla vice daquela etapa.</p>
     </div>
   </section>
 
@@ -418,8 +541,35 @@
     .sort((a,b)=> b[1]-a[1] || a[0].localeCompare(b[0],'pt-BR'))
     .map(([k,v]) => `<div class="chip"><b>${v}×</b>${esc(k)}</div>`).join('');
 
+  // ---------- Tela 3: Torneio dos Campeões ----------
+  // Regra: entra a campeã de cada etapa; se ela já estava classificada,
+  // a vaga vai para a vice daquela etapa.
+  const jaClassificado = new Map();   // nome -> etapa em que se classificou
+  const vagas = etapas.map(e => {
+    const repetida = e.camp.length && e.camp.every(n => jaClassificado.has(n));
+    const vaga = repetida
+      ? { etapa:e.n, nomes:e.vice, tipo:'vice', origem: jaClassificado.get(e.camp[0]) }
+      : { etapa:e.n, nomes:e.camp, tipo:'camp' };
+    vaga.nomes.forEach(n => { if(!jaClassificado.has(n)) jaClassificado.set(n, e.n); });
+    return vaga;
+  });
+  document.getElementById('classificados').innerHTML = vagas.map((v,i) => {
+    const [s,r] = NAIPES[(v.etapa-1)%4];
+    const pts = v.tipo==='camp' ? 22 : 20;
+    const aviso = v.nomes.length !== 2
+      ? `<div class="alerta">⚠ ${v.nomes.length} jogadores com ${pts} pts nesta etapa — conferir na planilha</div>` : '';
+    return `<article class="vaga ${v.tipo==='vice'?'herdada':''}">
+      <div class="num-vaga">${String(i+1).padStart(2,'0')}</div>
+      <div class="de"><span class="naipe ${r?'vermelho':''}">${s}</span>Vaga da ${v.etapa}ª etapa</div>
+      <div class="nm">${v.nomes.map(esc).join('<br>')}</div>
+      ${aviso}
+      <span class="tag ${v.tipo}">${v.tipo==='camp' ? '🏆 Campeã · 22 pts' : '🥈 Vice · 20 pts'}</span>
+      ${v.tipo==='vice' ? `<div class="obs">Campeões desta etapa já classificados na ${v.origem}ª etapa</div>` : ''}
+    </article>`;
+  }).join('');
+
   // ---------- Troca de telas ----------
-  const telas = ['ranking','etapas'];
+  const telas = ['ranking','etapas','torneio'];
   function mostrar(id){
     telas.forEach(t => {
       document.getElementById(t).classList.toggle('ativa', t===id);
@@ -434,7 +584,7 @@
     if(e.key === 'ArrowRight') mostrar(telas[(atual+1)%telas.length]);
     if(e.key === 'ArrowLeft')  mostrar(telas[(atual-1+telas.length)%telas.length]);
   });
-  mostrar(location.hash === '#etapas' ? 'etapas' : 'ranking');
+  mostrar(telas.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'ranking');
 
   // ---------- PDF / impressão ----------
   const hoje = new Date();
@@ -450,6 +600,16 @@
     setTimeout(() => { document.title = tituloOriginal; }, 1000);
   });
   window.addEventListener('beforeprint', () => { if(buscaEl.value){ buscaEl.value=''; desenhar(''); } });
+
+  // PDF só da arte do Torneio dos Campeões
+  document.getElementById('btnPdfArte').addEventListener('click', () => {
+    const tituloOriginal = document.title;
+    document.body.classList.add('so-arte');
+    document.title = 'Torneio dos Campeões - Truco AV 2026';
+    window.print();
+    setTimeout(() => { document.title = tituloOriginal; document.body.classList.remove('so-arte'); }, 1000);
+  });
+  window.addEventListener('afterprint', () => document.body.classList.remove('so-arte'));
 })();
 </script>
 </body>
