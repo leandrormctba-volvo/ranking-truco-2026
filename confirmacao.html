@@ -118,7 +118,7 @@
 <script>
 (function(){
   // ====== Número que recebe as confirmações (DDI + DDD + número, só dígitos) ======
-  const WHATSAPP = '';
+  const WHATSAPP = '5541999755041';
   // ================================================================================
 
   const dados = window.RANKING;
@@ -178,7 +178,8 @@ Vaga: ${v.etapa}ª etapa
 👤 Jogador 2: ${val('nome2')} — Matrícula: ${val('mat2')}
 
 Confirmamos nossa participação.`;
-    window.location.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
+    // api.whatsapp.com direto (o atalho wa.me estraga os emojis no redirecionamento)
+    window.location.href = 'https://api.whatsapp.com/send?phone=' + WHATSAPP + '&text=' + encodeURIComponent(msg);
   });
 })();
 </script>
