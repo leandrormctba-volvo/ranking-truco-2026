@@ -52,6 +52,10 @@
   .item.hora b{font-family:"Bebas Neue"; font-weight:400; font-size:38px; line-height:.95}
   .confirma{display:inline-block; margin-top:14px; padding:8px 18px; border-radius:999px; background:linear-gradient(120deg,#ffe7a0,var(--ouro)); color:#053039; font-size:14px; font-weight:600; box-shadow:0 8px 20px rgba(0,0,0,.3)}
   .confirma b{font-weight:800}
+  a.confirma{text-decoration:none; transition:transform .15s ease}
+  a.confirma:hover{transform:translateY(-2px)}
+  a.confirma::after{content:"  ›  Confirmar"; font-weight:800; background:#053039; color:#ffe7a0; padding:3px 10px; border-radius:999px; margin-left:8px; font-size:12px; white-space:pre}
+  @media print{ a.confirma::after{content:none} }
 
   .sub{margin:28px 0 16px; font-family:"Bebas Neue"; font-size:30px; letter-spacing:3px; color:var(--ouro); display:flex; align-items:center; gap:14px; justify-content:center}
   .sub::before,.sub::after{content:""; height:2px; width:min(18vw,140px); background:linear-gradient(90deg,transparent,var(--ouro))}
@@ -121,7 +125,7 @@
       <div class="item hora"><small>Horário</small><b>11h</b></div>
       <div class="item"><small>Local</small><b>Salão de Jogos<br>Espaço Soccer</b></div>
     </div>
-    <div class="confirma">✋ Confirme sua participação até <b>quinta-feira, 26/11</b></div>
+    <a class="confirma" href="confirmacao.html">✋ Confirme sua participação até <b>quinta-feira, 26/11</b></a>
 
     <div class="sub">Duplas classificadas</div>
     <div class="grade" id="classificados"></div>

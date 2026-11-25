@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confirmação – Torneio dos Campeões</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pet1:#0e6a7a; --pet2:#0a4f5c; --pet3:#05303a;
+    --ouro:#f2c14e; --ouro2:#c9932a; --papel:#fbf7ee; --vermelho:#d64545; --verde-wpp:#1fa855;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:#04242b; font-family:Inter,system-ui,sans-serif; color:#1b1b1b; min-height:100vh}
+  .wrap{max-width:640px; margin:0 auto; padding:24px 16px 48px}
+
+  .topo{text-align:center; color:#fff; border-radius:24px 24px 0 0; padding:30px 22px 24px;
+    background:
+      radial-gradient(500px 240px at 50% 0%, rgba(120,210,222,.22), transparent 65%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 1px, transparent 1px 9px),
+      linear-gradient(180deg, var(--pet1), var(--pet2) 60%, var(--pet3));
+    border:2px solid var(--ouro2); border-bottom:none}
+  .logo{display:block; margin:0 auto; width:min(170px,48vw); height:auto}
+  .naipes{margin:14px 0 4px; font-size:14px; letter-spacing:6px; color:#e9f3f4}
+  .naipes .r{color:var(--vermelho)}
+  h1{font-family:"Bebas Neue",sans-serif; font-weight:400; font-size:clamp(40px,9vw,58px); line-height:.92; margin:0; letter-spacing:1px}
+  h1 span{display:block; padding-top:.12em; margin-top:-.12em; background:linear-gradient(180deg,#ffe7a0,var(--ouro) 50%,var(--ouro2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .evento{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:16px}
+  .evento span{font-size:13px; font-weight:600; padding:6px 12px; border-radius:999px; background:rgba(2,30,36,.45); border:1px solid rgba(242,193,78,.45)}
+  .prazo{margin-top:12px; font-size:13px; color:#ffe7a0}
+  .prazo b{color:#fff}
+
+  form{background:var(--papel); border:2px solid var(--ouro2); border-top:none; border-radius:0 0 24px 24px; padding:22px 20px 24px}
+  .intro{margin:0 0 18px; font-size:14px; color:#40525a; line-height:1.5}
+  .campo{margin-bottom:16px}
+  label, .rot{display:block; font-size:12px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--pet2); margin-bottom:6px}
+  input[type=text], select{width:100%; font:inherit; font-size:16px; padding:12px 14px; border-radius:12px; border:1.5px solid #cfdcdf; background:#fff; color:#1b1b1b}
+  input[type=text]:focus, select:focus{outline:none; border-color:var(--pet1); box-shadow:0 0 0 3px rgba(14,106,122,.18)}
+  .jogador{border:1.5px solid #e2e9eb; border-radius:16px; padding:14px 14px 2px; margin-bottom:14px; background:#fff}
+  .jogador h2{margin:0 0 12px; font-size:15px; display:flex; align-items:center; gap:8px; color:var(--pet3)}
+  .jogador h2 .n{display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--pet2); color:#fff; font-size:13px}
+  .linha2{display:grid; grid-template-columns:1.6fr 1fr; gap:10px}
+  .ajuda{font-size:12px; color:#6b7c83; margin-top:5px}
+  .check{text-transform:none; letter-spacing:normal; font-weight:400; color:#1b1b1b;
+    display:flex; gap:10px; align-items:flex-start; font-size:14px; line-height:1.45; background:#fff7dd; border:1.5px solid #f2d98a; border-radius:14px; padding:12px 14px; margin:6px 0 18px; cursor:pointer}
+  .check input{width:20px; height:20px; margin-top:1px; accent-color:var(--pet2); flex:none}
+  .erro{display:none; color:#b23a3a; font-size:13px; font-weight:600; margin:-6px 0 14px}
+  .erro.on{display:block}
+  .enviar{all:unset; box-sizing:border-box; width:100%; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;
+    background:var(--verde-wpp); color:#fff; font-weight:800; font-size:16px; padding:15px 18px; border-radius:14px; box-shadow:0 8px 20px rgba(31,168,85,.3)}
+  .enviar:hover{filter:brightness(1.05)}
+  .enviar:focus-visible{outline:3px solid var(--ouro); outline-offset:2px}
+  .nota{text-align:center; font-size:12px; color:#6b7c83; margin:12px 0 0}
+  .voltar{display:block; text-align:center; margin-top:18px; color:#a9d4da; font-size:14px; font-weight:600; text-decoration:none}
+  .voltar:hover{text-decoration:underline}
+  @media (max-width:480px){ .linha2{grid-template-columns:1fr; gap:0} form{padding:20px 14px 22px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topo">
+    <img class="logo" src="logo-av-branca.png" alt="Associação Volvo">
+    <div class="naipes" aria-hidden="true">♠ <span class="r">♥</span> ♣ <span class="r">♦</span></div>
+    <h1>Torneio dos <span>Campeões</span></h1>
+    <div class="evento">
+      <span>📅 Domingo, 29/11/2026</span>
+      <span>🕚 11h</span>
+      <span>📍 Salão de Jogos – Espaço Soccer</span>
+    </div>
+    <div class="prazo">Confirme até <b>quinta-feira, 26/11</b></div>
+  </header>
+
+  <form id="form" novalidate>
+    <p class="intro">Preencha os dados da sua dupla para confirmar a participação. Ao clicar no botão, o WhatsApp abre com a mensagem pronta: é só <b>enviar</b>.</p>
+
+    <div class="campo">
+      <label for="vaga">Sua dupla</label>
+      <select id="vaga" required>
+        <option value="">Selecione a sua vaga…</option>
+      </select>
+      <div class="ajuda">Ao escolher, os nomes são preenchidos. Confira e ajuste se precisar.</div>
+    </div>
+
+    <div class="jogador">
+      <h2><span class="n">1</span>Jogador 1</h2>
+      <div class="linha2">
+        <div class="campo"><label for="nome1">Nome</label><input type="text" id="nome1" autocomplete="off" required></div>
+        <div class="campo"><label for="mat1">Matrícula</label><input type="text" id="mat1" autocomplete="off" required></div>
+      </div>
+    </div>
+    <div class="jogador">
+      <h2><span class="n">2</span>Jogador 2</h2>
+      <div class="linha2">
+        <div class="campo"><label for="nome2">Nome</label><input type="text" id="nome2" autocomplete="off" required></div>
+        <div class="campo"><label for="mat2">Matrícula</label><input type="text" id="mat2" autocomplete="off" required></div>
+      </div>
+    </div>
+
+    <label class="check"><input type="checkbox" id="ok" required>
+      <span>Confirmamos a participação da nossa dupla no <b>Torneio dos Campeões</b>, domingo, <b>29/11/2026, às 11h</b>, no Salão de Jogos – Espaço Soccer.</span>
+    </label>
+
+    <div class="erro" id="erro"></div>
+
+    <button class="enviar" type="submit">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4a.5.5 0 0 0 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.3.8 3.2.7a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+      Confirmar pelo WhatsApp
+    </button>
+    <p class="nota">A confirmação só vale depois que a mensagem for enviada no WhatsApp.</p>
+  </form>
+
+  <a class="voltar" href="torneio.html">← Ver as duplas classificadas</a>
+</div>
+
+<script src="dados.js"></script>
+<script>
+(function(){
+  // ====== Número que recebe as confirmações (DDI + DDD + número, só dígitos) ======
+  const WHATSAPP = '';
+  // ================================================================================
+
+  const dados = window.RANKING;
+  const N = dados[0].etapas.length;
+
+  // Mesma regra da arte: campeã de cada etapa; se já classificada, entra a vice.
+  const ja = new Map(); const vagas = [];
+  for(let i=0;i<N;i++){
+    const camp = dados.filter(p => p.etapas[i]===22).map(p=>p.nome);
+    const vice = dados.filter(p => p.etapas[i]===20).map(p=>p.nome);
+    const repetida = camp.length && camp.every(n => ja.has(n));
+    const nomes = repetida ? vice : camp;
+    nomes.forEach(n => { if(!ja.has(n)) ja.set(n, i+1); });
+    vagas.push({etapa:i+1, nomes});
+  }
+
+  const sel = document.getElementById('vaga');
+  vagas.forEach((v,i) => {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = `${v.etapa}ª etapa — ${v.nomes.join(' & ')}`;
+    sel.appendChild(o);
+  });
+  const $ = id => document.getElementById(id);
+  sel.addEventListener('change', () => {
+    const v = vagas[sel.value];
+    $('nome1').value = v ? (v.nomes[0]||'') : '';
+    $('nome2').value = v ? (v.nomes[1]||'') : '';
+    if(v) $('mat1').focus();
+  });
+  ['mat1','mat2'].forEach(id => $(id).addEventListener('input', e => { e.target.value = e.target.value.toUpperCase(); }));
+
+  $('form').addEventListener('submit', e => {
+    e.preventDefault();
+    const erro = $('erro');
+    const val = id => $(id).value.trim();
+    const faltando = [];
+    if(sel.value==='') faltando.push('a sua dupla');
+    if(!val('nome1') || !val('mat1')) faltando.push('nome e matrícula do jogador 1');
+    if(!val('nome2') || !val('mat2')) faltando.push('nome e matrícula do jogador 2');
+    if(!$('ok').checked) faltando.push('a caixa de confirmação');
+    if(faltando.length){
+      erro.textContent = 'Falta preencher: ' + faltando.join(', ') + '.';
+      erro.classList.add('on'); return;
+    }
+    if(!WHATSAPP){
+      erro.textContent = 'O número de WhatsApp para receber as confirmações ainda não foi configurado.';
+      erro.classList.add('on'); return;
+    }
+    erro.classList.remove('on');
+    const v = vagas[sel.value];
+    const msg =
+`✅ *Confirmação – Torneio dos Campeões (Truco)*
+📅 Domingo, 29/11/2026 · 11h · Salão de Jogos – Espaço Soccer
+
+Vaga: ${v.etapa}ª etapa
+👤 Jogador 1: ${val('nome1')} — Matrícula: ${val('mat1')}
+👤 Jogador 2: ${val('nome2')} — Matrícula: ${val('mat2')}
+
+Confirmamos nossa participação.`;
+    window.location.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
+  });
+})();
+</script>
+</body>
+</html>
